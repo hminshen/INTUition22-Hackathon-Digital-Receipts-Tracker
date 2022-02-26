@@ -6,7 +6,7 @@ import json
 from datetime import datetime
 
 
-url = "http://127.0.0.1:8000/reciepts/"
+url = "http://127.0.0.1:8000/reciepts/" #place to make the api calls
 flagToDo = ""
 
 while flagToDo.upper() != "E":
