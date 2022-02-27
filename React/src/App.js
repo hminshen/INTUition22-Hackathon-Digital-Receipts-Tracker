@@ -6,7 +6,38 @@ import tabData from "./tableData.json";
 const serverName = "http://192.168.31.241";
 
 function App() {
-  const [tableData, setTableData] = useState(tabData);
+  var http = require('follow-redirects').http;
+var fs = require('fs');
+
+var options = {
+  'method': 'GET',
+  'hostname': '127.0.0.1',
+  'port': 8000,
+  'path': '/reciepts/',
+  'headers': {
+  },
+  'maxRedirects': 20
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function (chunk) {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+
+  res.on("error", function (error) {
+    console.error(error);
+  });
+});
+
+req.end();
+  const [ReceiptData, setReceiptData] = useState(req);
   const Nav_bar: React.VFC = () => {
     return (
       <div className="nav--bar">
@@ -24,37 +55,15 @@ function App() {
   
   
   
-  const getData=()=>{
-    fetch('./tableData.json'
-    ,{
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       }
-    }
-    )
-      .then(function(response){
-        console.log(response)
-        return response.json();
-      })
-      .then(function(myJson) {
-        console.log(myJson);
-        setTableData(myJson)
-      });
-  }
-  useEffect(()=>{
-    getData()
-  },[])
 
   return (
     <div className="App">
-      <div className="header">Table Occupancy System</div>
-      {tableData.map(({Zone, Available, LeavingSoon, Occupied}) => (
+      <div className="header">Digital Receipt System</div>
+      {ReceiptData.map(({itemList, dateTime, total_price}) => (
           <div className="newRow">
-          <TableData name="Zone" data={Zone} />
-          <TableData name="Available" data={Available} />
-          <TableData name="Leaving Soon" data={LeavingSoon} />
-          <TableData name="Occupied" data={Occupied} />
+          <ReceiptData name="itemList" data={itemList} />
+          <ReceiptData name="dateTime" data={dateTime} />
+          <ReceiptData name="total_price" data={total_price} />
           </div>
         ))}
     </div>
