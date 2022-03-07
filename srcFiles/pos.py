@@ -19,14 +19,19 @@ while flagToDo.upper() != "E":
     >> """)
     if flagToDo.upper() == "A": 
         order = {} 
+        itemNo = 1
         total_price = 0
         flagOrder = "N"
         while flagOrder.upper() != "Y":
+            orderItem = {}
             item_Name = input("What item would you like to order? ")
             itemQty = int(input("Quantity to purchase? "))
             itemPrice = float(input("What is the price of your item? "))
-            item_list = [itemQty, itemPrice]
-            order[item_Name] = item_list
+            orderItem["Name"] = item_Name
+            orderItem["Quantity"] = itemQty
+            orderItem["Price"]= itemPrice
+            order["Item" + str(itemNo)] = orderItem
+            itemNo+=1
             total_price = total_price + (itemPrice*itemQty)
             flagOrder = input("Do you want to proceed to payment? If yes, press Y, else press any other key ")
 
