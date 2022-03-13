@@ -13,10 +13,10 @@ To showcase the proof of concept, I made use of the following:
 ## Notes:
 ### The following 3 need to be start up to simulate the full Digital Receipts Tracker System
 
-1. POS System
+1. POS System:
 Run the pos.py file to start up the POS system
 
-2. API Interface
+2. API Interface:
 In the main project folder, run the following commands in the terminal:
 - source env/bin/activate
 - cd srcFiles
@@ -24,7 +24,7 @@ In the main project folder, run the following commands in the terminal:
 
 This starts the API interface which would allow you to make API calls to it
 
-3. Webpage Display
+3. Webpage Display:
 Open the terminal and navigate to the reactpart folder before performing an "npm run start" to start the webpage
 
 
